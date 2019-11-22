@@ -156,7 +156,7 @@ for z in stackPaths:
         
     starFile = []
     with open(starPath, 'r') as values: 
-        for i in range(0,18): #skip header
+        for i in range(0,19): #skip header
             next(values)
         starReader = csv.reader(values)
         for lines in starReader:
@@ -173,7 +173,7 @@ for z in stackPaths:
         
         img_array.data[img] = img_norm
         if matlab:
-	    binary_array[img] = img_norm
+            ary_array[img] = img_norm
 
         #print('norm check:')
         #normalize(img_norm) #NORM CHECK
@@ -181,10 +181,10 @@ for z in stackPaths:
         #############################
         # update alignment file:
         star = re.split(r'[ ,|;"]+', starFile[PD+1][0]) #need to make sure skipping header correctly
-        alignFile.write('%.6f\t%.6f\t%.6f\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s@Hsp2D_5PD.mrcs\n' \
+        alignFile.write('%.6f\t%.6f\t%.6f\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s@Hsp2D_5PD.mrcs\n' \
             % (float(star[1]), float(star[2]), float(star[3]), float(star[4]), float(star[5]), \
             float(star[6]), float(star[7]), float(star[8]), float(star[9]), float(star[10]), \
-            float(star[11]), float(star[12]), float(star[13]), img+1))
+            float(star[11]), float(star[12]), float(star[13]), float(star[14]), img+1))
 	
 	# update spider file (index, number of params, psi, theta [0,180], phi [-180,180], class, x, y, u, v, uv angle):
 	if matlab:
