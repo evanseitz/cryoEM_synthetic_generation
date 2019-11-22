@@ -25,4 +25,4 @@ Once the Anaconda environment is installed, it must be initiated each time befor
 When you are done using the environment, always exit via: `conda deactivate`
 
 ### instructions:
-This repository lays out the file/folder structure needed to produce synthetic continuum datasets. Please do not rename the internal folders here, as that they are referenced by several different scripts. Individual instructions for use are provided within each subsequent module.
+This repository lays out the file/folder structure needed to produce customized synthetic continuum datasets. Please do not rename the internal folders here, as that they are referenced by several different scripts. Individual instructions for use are provided within each subsequent folder.
