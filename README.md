@@ -1,4 +1,4 @@
-# synthetic_continua
+# README
 Simulation of cryo-EM ensemble data from atomic models of molecules exhibiting continuous motions.
 
 ### paper:
