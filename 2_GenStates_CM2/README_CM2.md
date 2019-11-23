@@ -7,7 +7,7 @@
 ---
 
 ## Instructions for generating the second Conformational Motion (CM2) and corresponding state space
-- The `2_GenStates_CM2` folder contains the script `Gen_CM2.py`, which will read in the *N* previously generated CM1 structures (`.pdb`) and apply a second set of discrete transformations on them, resulting in a *N*x*M* state space. Before running this script from the command line interface (from within this same directory), you will need to alter the following variables depending on your needs:
+- The `2_GenStates_CM2` folder contains the script `Gen_CM2.py`, which will read in the *N* previously generated CM1 structures (`.pdb`) and apply a second set of discrete transformations on them, resulting in a *N*x*M* state space. Before running this script (via `python Gen_CM2.py`) from the command line interface (from within this same directory), you will need to alter the following variables depending on your needs:
   - `if idx < 10`: if you previously generated *N* > 99 CM1 states, follow the same pattern for proper indexing (leading zeros); this logic also follows for the section underneath the `# SAVE` comment
   - `cmd.select`: range of residues to alter for CM2
   - `range(1,21)`: range of states to be generated for CM2 (e.g., 20)
