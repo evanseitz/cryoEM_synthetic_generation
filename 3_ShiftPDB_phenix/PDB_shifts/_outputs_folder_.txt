@@ -1,0 +1,1 @@
+Outputs folder for the CoM-shifted NxM state space (.pdb)
