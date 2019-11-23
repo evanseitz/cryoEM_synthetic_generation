@@ -9,7 +9,7 @@
 ## Instructions for generating the first Conformational Motion (CM1)
 - The `1_GenStates_CM1` folder contains the original Hsp90 monomer arms (as extracted from PDB 2cg9), entitled `monoA.pdb` and `monoB.pdb`. If running a different protein, you will need to isolate your own subunits in a similar fashion based on your preferred structural motion for CM1
 - To remove undesirable overlap of atoms during CM1, as a convenience only, a few residues were first removed from each of these monomers. The resulting files are entitled `monoA_snip.pdb` and `monoB_snip.pdb`
-- The script `Gen_CM1.py` will automatically read in these structures and apply a set of discrete transformations on them, resulting in *N* CM1 states. Before running this script from the command line interface (from within this same directory), you will need to alter the following variables depending on your needs:
+- The script `Gen_CM1.py` will automatically read in these structures and apply a set of discrete transformations on them, resulting in *N* CM1 states. Before running this script (via `python Gen_CM1.py`) from the command line interface (from within this same directory), you will need to alter the following variables depending on your needs:
   - `monoA`: filename of the first subunit
   - `monoB`: filename of the second subunit
   - `range(1,21)`: range of states to be generated (e.g., 20)
