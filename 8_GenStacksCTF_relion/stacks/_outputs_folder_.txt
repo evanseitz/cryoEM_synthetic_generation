@@ -1,0 +1,1 @@
+Outputs folder for the stacks (MRCS) and alignments (STAR)
