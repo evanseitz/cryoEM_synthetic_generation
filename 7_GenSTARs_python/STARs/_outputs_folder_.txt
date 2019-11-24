@@ -1,0 +1,1 @@
+Outputs folder for the alignment files (STAR)
