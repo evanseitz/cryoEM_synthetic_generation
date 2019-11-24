@@ -1,30 +1,14 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
-{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\margl1440\margr1440\vieww10800\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+# README
+## Required packages
+- Python
+- Anaconda with `synth` environment activated (see main repository README)
 
-\f0\fs24 \cf0 # README\
-## Required packages\
-- Chimera (UCSF)\
-- Python\
-- Anaconda with `synth` environment activated (see main repository README)\
-\
----\
-\
-## Instructions for generating the first Conformational Motion (CM1)\
-- The `1_GenStates_CM1` folder contains the original Hsp90 monomer arms (as extracted from PDB 2cg9), entitled `monoA.pdb` and `monoB.pdb`. If running a different protein, you will need to isolate your own subunits in a similar fashion based on your preferred structural motion for CM1.\
-- To remove undesirable overlap of atoms during CM1, as a convenience only, a few residues were first removed from each of these monomers. The resulting files are entitled `monoA_snip.pdb` and `monoB_snip.pdb`.\
-- The script `Gen_CM1.py` will automatically read in these structures and apply a set of discrete transformations on them, resulting in *N* CM1 states. Before running this script from the command line interface (from within this same directory), you will need to alter the following variables depending on your needs:\
--- `monoA`: filename of the first subunit\
--- `monoB`: filename of the second subunit\
--- `range(1,21)`: range of states to be generated (e.g., 20)\
--- Chimera logic under the `range(1,21)` loop, to depict the motions of interest\
-- Running `Gen_CM1.py` will generate *N* CM1 states (`.pdb`) in the output folder `Generate_CC1`\
-\
----\
-\
-### Remarks\
-- Both CM1 and CM2 could potentially be created in this way. However, in this exemplory workflow, CM2 was instead created using PyMOL (as a convenience for the desired motions). As such, either of these scripts can be used as inspiration for generating your CM1xCM2 state space, or an entirely different method altogether. Just make sure that the output `.pdb` files for this state space are organized in the proper folders before proceeding to subsequent steps.\
-}
+---
+
+## Instructions for aligning all structures
+- The `7_GenSTARs_python` folder contains the `GenStars.py` script, which will generate a unique alignment file for each of your cloned Coulomb potential maps (`.mrc`) created in the previous step. Before running this script (via `python GenStars.py`) from the command line interface (from within this same directory), you will need to alter the following depending on your needs:
+  - `S2`: change the file listed in this variable (default `proj812.txt` for 812 PDs) to switch between different tessellated spheres; several options have been provided, along with a Cinema4D script (`EulerAngles.c4d`) for generating your own patterns. You may also want to rename the default number used in your `alignOut` file to match
+  - `quatsGaussian.op(S2)`: turn this variable on (`if 1:`) for applying quaternion transformations on each image about its original PD location on the S2 sphere. Inside of the `quatsGaussian.py` script, you may want to additionally change the angle used in the first quaternion transformation (`w1`) which corresponds to the spread of each image from its PD center
+  - `df`: alter the range of defocus values to sample from for each image
+  - `x,y`: alter the x and y shifts defining the object's center in each image
+- Running `GenStars.py` will create all alignment files in the `STARs` folder, which are needed for subsequent projections. As well, once these alignment files are generated, running `python mayavi_viewer.py` provides a visualization tool for observing the final distribution of images on the S2 sphere.
