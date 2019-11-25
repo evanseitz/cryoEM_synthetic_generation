@@ -131,7 +131,8 @@ alignFile.write('\ndata_ \
                 \n_rlnDefocusAngle #11 \
                 \n_rlnCtfBfactor #12 \
                 \n_rlnPhaseShift #13 \
-                \n_rlnImageName #14 \
+		\n_rlnPixelSize #14 \
+                \n_rlnImageName #15 \
                 \n')
 
 # initiate spider file:
