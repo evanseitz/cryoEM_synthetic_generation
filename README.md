@@ -1,8 +1,9 @@
 # README
-## 
+## Cryo-EM Synthethic Continua
 
 This repository contains the software implementation for our paper *Simulation of cryo-EM ensemble data from atomic models of molecules exhibiting continuous motions* (Seitz, Acosta-Reyes, Schwander, Frank), bioRxiv:. It contains tools to apply the discussed methods to new models.
 
+### Instructions:
 This workflow has been segmented into modules (folders 1-9) that provide the ability to create branching versions of your continuum at each step, enabling direct comparison of datasets with different motions, energetics, or noise, etc. This workfow will be optimized further in later releases. Please do not rename the internal folders or alter the hierarchy, as they are referenced repeatedly in downstream scripts. Individual instructions for use of each module in this workflow are provided within its corresponding folder. 
 
 ### Required Software:
@@ -30,4 +31,5 @@ Please cite `E. Seitz, F. Acosta-Reyes, P. Schwander and J. Frank (2019) <http:b
 
 ### License:
 Copyright 2018-2019 Evan Seitz
+
 For further details, please see the LICENSE file.
