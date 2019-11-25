@@ -29,6 +29,9 @@ When you are done using the environment, always exit via: `conda deactivate`
 ### Attribution:
 Please cite `E. Seitz, F. Acosta-Reyes, P. Schwander and J. Frank (2019) <http:biorxiv.org///>` if you find this code useful in your research.
 
+[![DOI](https://zenodo.org/badge/220536612.svg)](https://zenodo.org/badge/latestdoi/220536612)
+
+
 ### License:
 Copyright 2018-2019 Evan Seitz
 
