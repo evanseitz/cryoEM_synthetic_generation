@@ -5,7 +5,7 @@
 
 ---
 
-## Instructions for aligning all structures
+## Instructions for generating occupancy clones
 - The `6_GenClones_python` folder contains the `createClones.py` script, which will create duplicates of your Coulomb potential maps (`.mrc`) to match the numbers in the previously generated occupancy map. Before running this script (via `python createClones.py`) from the command line interface (from within this same directory), you will need to alter the following depending on your needs:
   - `occPath`: ensure the file path matches the occupancy map (`.npy`) generated in the previous step
   - `states`: must match the number of states used; if *N* and *M* differ, the `i, j` loop must be revised to account for this asymmetry
