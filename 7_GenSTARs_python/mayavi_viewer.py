@@ -95,7 +95,7 @@ class Mayavi_Scene(HasTraits):
             if os.path.exists('cartXYZ.txt'):
                 os.remove('cartXYZ.txt')
             cartXYZ = np.column_stack((index,cartX,cartY,cartZ))
-            np.savetxt('cartXYZ.txt', cartXYZ, delimiter='\t')#, fmt='%1.6i %1.3f %1.3f %1.3f')
+            np.savetxt('cartXYZ.txt', cartXYZ, delimiter='\t', fmt='%1.6i %1.3f %1.3f %1.3f')
 
         # calculate S2-surface densities:
         if 0:
