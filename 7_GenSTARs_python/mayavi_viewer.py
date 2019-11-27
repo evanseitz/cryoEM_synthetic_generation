@@ -92,8 +92,10 @@ class Mayavi_Scene(HasTraits):
         
         # save angles to file (e.g., for rendering figures in external programs):
         if 1:
+            if os.path.exists('cartXYZ.txt'):
+                os.remove('cartXYZ.txt')
             cartXYZ = np.column_stack((index,cartX,cartY,cartZ))
-            np.savetxt('cartXYZ.txt', cartXYZ, delimiter='\t', fmt='%i %1.4f %1.4f %1.4f')
+            np.savetxt('cartXYZ.txt', cartXYZ, delimiter='\t')#, fmt='%1.6i %1.3f %1.3f %1.3f')
 
         # calculate S2-surface densities:
         if 0:
