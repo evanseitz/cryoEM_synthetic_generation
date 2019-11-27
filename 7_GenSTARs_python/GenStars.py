@@ -33,7 +33,7 @@ for i in mrcPaths:
 
     ##########################
     # import angles:
-    S2 = pd.read_csv('proj812.txt', header=None, delim_whitespace=True) #projections
+    S2 = pd.read_csv('tessellations/proj812.txt', header=None, delim_whitespace=True) #projections
     if 1: #perform quaternion perturbations on each PD
         rot, tilt = quatsGaussian.op(S2) 
         psi = S2[3] #no in-plane rotations
