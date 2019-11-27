@@ -52,22 +52,19 @@ def q_to_axisangle(q):
     return normalize(v), theta
 
 # find orthonormal components for a given vector:
-def orthonormal(k): 
-    # Gram-Schmidt Process:
-    x = np.random.randn(3) #take a random vector
-    x = x / (x**2).sum()**0.5 #normalize random vector
-    x -= x.dot(k) * k #make it orthogonal to k
-    x /= np.linalg.norm(x) #normalize it
-    y = np.cross(k,x)
+def orthonormal(k):
+    x = (k[1],-k[0],0)
+    length = np.sqrt(k[0]**2 + k[1]**2)
+    if length > 1e-15:
+        x = x/length
+    else:
+        x = (1,0,0) #handle exceptions for k = (0,0,1) and k = (0,0,-1)
+    
     if 0: #sanity-check
         print('x:', x)
-        print('y:', y)
-        print('norm x,y:', np.linalg.norm(x), np.linalg.norm(y))
-        print('x cross y:', np.cross(x,y))
-        print('x dot y:', np.dot(x,y))
+        print('norm x:', np.linalg.norm(x))
         print('x dot k:', np.dot(x,k))
-        print('y dot k:', np.dot(y,k))
-    return x, y
+    return x    
 
 # convert final unit-vectors to Euler:
 def cart2sph(x, y, z): 
@@ -105,7 +102,6 @@ def op(S2):
     for xyz in range(len(x0)):
         PDs[idx] = [x0[idx], y0[idx], z0[idx]]
         idx += 1
-    
     #####################################   
     # apply random angular perturbations:
     cartesian = [] #final positions of each rotated PD
@@ -113,14 +109,16 @@ def op(S2):
     tilt = [] #i.e., theta (or elevation)
     for k in PDs:
         k = k / (k**2).sum()**0.5 #normalize initial vector
-        x,y = orthonormal(k) #find orthonormal components of k
+        x = orthonormal(k) #find orthonormal component of k
         
-        w1 = np.random.normal(0, np.pi/60, 1) #mu, sigma, samples
-        r1 = axisangle_to_q(x, w1/2) #rotate about x by w1 degrees 
+        w1 = np.random.normal(0, np.pi/144, 1) #mu, sigma (in radians), number of samples
+        r1 = axisangle_to_q(x, w1) #rotate about x by w1 degrees 
         k1 = qv_mult(r1, (k[0],k[1],k[2])) #rotate k about x
+        
         w2 = np.random.uniform(-np.pi,np.pi,1) #full circle of options
-        r2 = axisangle_to_q(k, w2/2)
+        r2 = axisangle_to_q(k, w2)
         k2 = qv_mult(r2, (k1[0],k1[1],k1[2])) #rotate v1 about k
+        
         cartesian.append(k2)
         r, phi, theta = cart2sph(k2[0], k2[1], k2[2]) #convert cartesian coords to spherical
         rot.append(float(phi)+180.)
