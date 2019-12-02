@@ -9,4 +9,5 @@
   - `for i in`: change the path before `/6_GenClones_python/` to match your system
   - `angFile`: change the path before `/7_GenSTARs_python/`, as well as the correct filename (default `proj812`) if this was renamed in the previous step
   - `outFile`: change the path before `/8_GenStacksCTF_relion/` to match your system
+  - `angpix`: change to match your previously-defined pixel size (if altered)
 - Running `relion_projCTF.sh` will generate an updated alignment file (`.star`) and image stack (`.mrcs`) for each of the previously cloned Coulomb potential maps (`.mrc`); these files can be found in the `stacks` output folder.
