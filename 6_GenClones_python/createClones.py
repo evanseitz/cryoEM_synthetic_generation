@@ -21,7 +21,7 @@ pyDir = os.path.dirname(os.path.abspath(__file__)) #python file directory
 parDir = os.path.dirname(pyDir) #parent directory
 origDir = os.path.join(parDir, '4_GenMRC_eman/MRCs')
 occPath = os.path.join(parDir, '5_GenOcc_python/Occ2D_1k.npy')
-cloneDir = os.path.join(parDir, '6_GenMRC_pyClones/MRC_clones')
+cloneDir = os.path.join(parDir, '6_GenClones_python/MRC_clones')
 
 occFile = np.load(occPath)
 states = 20
