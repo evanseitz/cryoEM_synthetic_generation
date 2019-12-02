@@ -7,72 +7,97 @@ from pylab import imshow, show, loadtxt
 import mrcfile
 import csv
 import re
+from scipy import stats
 
-# required environment = ManifoldEM
-matlab = False
+pyDir = os.path.dirname(os.path.abspath(__file__)) #python file directory
+parDir = os.path.dirname(pyDir) #parent directory
+dataDir = os.path.join(parDir, '8_GenStacksCTF_relion/stacks') #location of all .star and .mrcs
 
 ##########################
 # user inputs:
-pyDir = os.path.dirname(os.path.abspath(__file__)) #python file directory
-parDir = os.path.dirname(pyDir) #parent directory
+matlab = False
+fname = 'Hsp2D_Res3_All'
+occFile = os.path.join(parDir, '5_GenOcc_python/Occ2D_1k.npy')
+##########################
 
-dataDir = os.path.join(parDir, '8_GenStacksCTF_relion/stacks') #location of all .star and .mrcs
-
-stackOut = os.path.join(pyDir, 'Hsp2D_All.mrcs')
-alignOut = os.path.join(pyDir, 'Hsp2D_All.star')
+stackOut = os.path.join(pyDir, '%s.mrcs' % fname)
+alignOut = os.path.join(pyDir, '%s.star' % fname)
 if os.path.exists(stackOut):
     os.remove(stackOut)
 if os.path.exists(alignOut):
     os.remove(alignOut)
 
 if matlab:
-    binaryOut = os.path.join(pyDir, 'Hsp2D_All.dat')
-    spiderOut = os.path.join(pyDir, 'Hsp2D_All.spi')
+    binaryOut = os.path.join(pyDir, '%s.dat' % fname)
+    spiderOut = os.path.join(pyDir, '%s.spi' % fname)
     if os.path.exists(spiderOut):
         os.remove(spiderOut)
     if os.path.exists(binaryOut):
         os.remove(binaryOut)
     
-occFile = os.path.join(parDir, '5_GenOcc_python/Occ2D_1k.npy')
 occ = np.load(occFile)
 temp_stack = mrcfile.open(os.path.join(dataDir, 'state_01_01_1.mrcs'))
 PDs, box, box = temp_stack.data.shape
-#temp_stack.close
-#PDs = 5 #comment out for full stack
+temp_stack.close
+#PDs = 5 #comment this line out for full stack
 snapshots = int(np.sum(occ)*PDs)
 print('Snapshots:',snapshots)
 
 starPaths = []
-i = 0
 for root, dirs, files in os.walk(dataDir):
     for file in sorted(files):
         if not file.startswith('.'): #ignore hidden files
             if file.endswith(".star"):
                 starPaths.append(os.path.join(root, file))
-                i += 1
 
 stackPaths = []
-i = 0
 for root, dirs, files in os.walk(dataDir):
     for file in sorted(files):
         if not file.startswith('.'): #ignore hidden files
             if file.endswith(".mrcs"):
                 stackPaths.append(os.path.join(root, file))
-                i += 1
     
 ##########################
 # FUNCTIONS:
-##########################
+########################## 
 # function to find SNR:
 def find_SNR(image):
-    pixFreq2d = []
-    for a in image:
-        pixFreq2d.append(a)
-    pixFreq1d = list(itertools.chain.from_iterable(pixFreq2d))
-    sig_mean = np.mean(pixFreq1d)
-    sig_var = np.var(pixFreq1d)
+    IMG_2D = []
+    for pix in image:
+        IMG_2D.append(pix)
+
+    IMG_1D = list(itertools.chain.from_iterable(IMG_2D))
+    img_mean = np.mean(IMG_1D)
+    img_var = np.var(IMG_1D)
+    img_std = np.sqrt(img_var)
+    
+    if 0: #to illustrate signal only, must be OFF during stack generation
+        SIG_1D = np.ndarray(shape=np.shape(IMG_1D)) #empty array for signal-pixels only
+        idx = 0
+        for pix in IMG_1D:
+            #if -img_std*.25 < pix < img_std*.25:
+            if (img_mean-img_std*.5) < pix < (img_mean+img_std*.5):
+                SIG_1D[idx] = -100 #arbitrarily large for illustration
+            else:
+                SIG_1D[idx] = IMG_1D[idx]
+            idx += 1
+        SIG_2D = np.asarray(SIG_1D).reshape(250, 250)
+        plt.imshow(SIG_2D)
+        plt.show()
+        
+    else:
+        SIG_1D = []
+        for pix in IMG_1D:
+            if -img_std*.25 < pix < img_std*.25:
+                pass
+            else:
+                SIG_1D.append(pix) #only grab signal
+
+    sig_mean = np.mean(SIG_1D)
+    sig_var = np.var(SIG_1D)
     noise_var = sig_var / 0.1 #experimental regime
     noise_std = np.sqrt(noise_var)
+    
     return sig_mean, noise_std
 
 ##########################
@@ -105,7 +130,7 @@ def normalize(image):
     img_norm = (image - bg_mean) / bg_std
     if 0: #NORM CHECK, for testing only
         print('bg_mean:', bg_mean)
-        print('bg_std:',bg_std)
+        print('bg_std:', bg_std)
     return img_norm
 
 ##########################
@@ -131,7 +156,7 @@ alignFile.write('\ndata_ \
                 \n_rlnDefocusAngle #11 \
                 \n_rlnCtfBfactor #12 \
                 \n_rlnPhaseShift #13 \
-		\n_rlnPixelSize #14 \
+                \n_rlnPixelSize #14 \
                 \n_rlnImageName #15 \
                 \n')
 
@@ -163,29 +188,31 @@ for z in stackPaths:
         for lines in starReader:
             starFile.append(lines)
     values.close()
-
+    
     for PD in range(len(stack.data)): #e.g., [0,812]
     #for PD in [93, 194, 267, 469, 533]: #comment out for full stack and use above line instead
+        star = re.split(r'[ ,|;"]+', starFile[PD+1][0]) #need to make sure skipping header correctly
+        
         img_orig = stack.data[PD] #each image within a given stack; e.g. len = 812
-
+        
         sig_mean, noise_std = find_SNR(img_orig) #find SNR
         img_noise = add_noise(sig_mean, noise_std, img_orig) #apply noise
         img_norm = normalize(img_noise) #normalize
         
         img_array.data[img] = img_norm
         if matlab:
-            ary_array[img] = img_norm
-
-        #print('norm check:')
-        #normalize(img_norm) #NORM CHECK
+            binary_array[img] = img_norm
+        
+        if 0:
+            print('norm check:')
+            normalize(img_norm) #NORM CHECK
 
         #############################
         # update alignment file:
-        star = re.split(r'[ ,|;"]+', starFile[PD+1][0]) #need to make sure skipping header correctly
-        alignFile.write('%.6f\t%.6f\t%.6f\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s@Hsp2D_All.mrcs\n' \
+        alignFile.write('%.6f\t%.6f\t%.6f\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s@%s.mrcs\n' \
             % (float(star[1]), float(star[2]), float(star[3]), float(star[4]), float(star[5]), \
             float(star[6]), float(star[7]), float(star[8]), float(star[9]), float(star[10]), \
-            float(star[11]), float(star[12]), float(star[13]), float(star[14]), img+1))
+            float(star[11]), float(star[12]), float(star[13]), float(star[14]), img+1, fname))
 	
 	# update spider file (index, number of params, psi, theta [0,180], phi [-180,180], class, x, y, u, v, uv angle):
 	if matlab:
