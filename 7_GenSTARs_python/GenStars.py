@@ -4,6 +4,7 @@ import mrcfile
 import pandas as pd
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
+from decimal import Decimal
 import quatsGaussian
 
 mrcPaths = []
@@ -77,7 +78,7 @@ for i in mrcPaths:
             y = np.random.uniform(-5,5)
 
         alignFile.write('%.6f\t%.6f\t%.6f\t%.3f\t%.3f\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
-            % (rot[i],tilt[i],psi[i],x,y,float(df),float(df),300.,2.7,.1,0.,0.,0.,1.))
+            % (Decimal(rot[i]),Decimal(tilt[i]),Decimal(psi[i]),x,y,float(df),float(df),300.,2.7,.1,0.,0.,0.,1.))
 
     alignFile.close()
     
