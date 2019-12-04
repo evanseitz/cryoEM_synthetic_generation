@@ -8,6 +8,7 @@ import mrcfile
 import csv
 import re
 from scipy import stats
+from decimal import Decimal
 
 pyDir = os.path.dirname(os.path.abspath(__file__)) #python file directory
 parDir = os.path.dirname(pyDir) #parent directory
@@ -16,7 +17,7 @@ dataDir = os.path.join(parDir, '8_GenStacksCTF_relion/stacks') #location of all 
 ##########################
 # user inputs:
 matlab = False
-fname = 'Hsp2D_Res3_All'
+fname = 'Hsp2D_All'
 occFile = os.path.join(parDir, '5_GenOcc_python/Occ2D_1k.npy')
 ##########################
 
@@ -191,8 +192,9 @@ for z in stackPaths:
     
     for PD in range(len(stack.data)): #e.g., [0,812]
     #for PD in [93, 194, 267, 469, 533]: #comment out for full stack and use above line instead
-        star = re.split(r'[ ,|;"]+', starFile[PD+1][0]) #need to make sure skipping header correctly
-        
+        #star = re.split(r'[ ,|;"]+', starFile[PD+1][0]) #doesn't catch scientific notation
+        star = starFile[PD+1][0].split() #skip by spacing; need to make sure skipping header correctly 
+
         img_orig = stack.data[PD] #each image within a given stack; e.g. len = 812
         
         sig_mean, noise_std = find_SNR(img_orig) #find SNR
@@ -210,9 +212,9 @@ for z in stackPaths:
         #############################
         # update alignment file:
         alignFile.write('%.6f\t%.6f\t%.6f\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s@%s.mrcs\n' \
-            % (float(star[1]), float(star[2]), float(star[3]), float(star[4]), float(star[5]), \
-            float(star[6]), float(star[7]), float(star[8]), float(star[9]), float(star[10]), \
-            float(star[11]), float(star[12]), float(star[13]), float(star[14]), img+1, fname))
+            % (Decimal(star[0]), Decimal(star[1]), Decimal(star[2]), float(star[3]), float(star[4]), \
+            float(star[5]), float(star[6]), float(star[7]), float(star[8]), float(star[9]), \
+            float(star[10]), float(star[11]), float(star[12]), float(star[13]), img+1, fname))
 	
 	# update spider file (index, number of params, psi, theta [0,180], phi [-180,180], class, x, y, u, v, uv angle):
 	if matlab:
