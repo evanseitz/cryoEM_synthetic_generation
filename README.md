@@ -27,7 +27,7 @@ Once the Anaconda environment is installed, it must be initiated each time befor
 When you are done using the environment, always exit via: `conda deactivate`
 
 ### Attribution:
-Please cite `E. Seitz, F. Acosta-Reyes, P. Schwander and J. Frank (2019) <https://www.biorxiv.org/content/10.1101/864116v1>` if you find this code useful in your research.
+Please cite `E. Seitz, F. Acosta-Reyes, P. Schwander and J. Frank (2019); https://www.biorxiv.org/content/10.1101/864116v1` if you find this code useful in your research.
 
 [![DOI](https://zenodo.org/badge/220536612.svg)](https://zenodo.org/badge/latestdoi/220536612)
 
