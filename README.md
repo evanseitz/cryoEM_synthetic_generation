@@ -33,6 +33,6 @@ Please cite `E. Seitz, F. Acosta-Reyes, P. Schwander and J. Frank (2019); https:
 
 
 ### License:
-Copyright 2018-2019 Evan Seitz
+Copyright 2018-2020 Evan Seitz
 
 For further details, please see the LICENSE file.
