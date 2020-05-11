@@ -12,14 +12,16 @@ This workflow has been segmented into modules (folders 1-9) that provide the abi
 - Chimera (https://www.cgl.ucsf.edu/chimera/)
 - PyMol (https://pymol.org/2/)
 - Phenix (https://www.phenix-online.org/)
-- EMAN2
-- RELION
+- EMAN2 (https://cryoem.bcm.edu/cryoem/downloads/view_eman2_versions)
+- RELION (https://github.com/3dem/relion)
 
 All versions of the last 5 libraries should be able to process the commands used in this repository. As a reference, we used `Phenix 1.17rc5-3630`, `EMAN 2.31 final`, `PyMOL 2.3.3`, `Chimera 1.13`, and `RELION 3.0.8 (Precision: BASE=double, CUDA-ACC=single)`. Additionally, either Chimera or PyMOL can be used to generate conformational motions: both have been used here (one for CM1, another for CM2) to illustrate general use.
 
 For Phenix and Chimera, the binaries can be directly obtained on their web page. These packages require an initial registration and are free for research purposes. 
 
 For Pymol, the official site sells licenses (there are licenses for education https://pymol.org/edu/ and research http://pymol.org/academic) as well as providing binaries to use with them. They also provide official free binaries of a legacy 0.99 version through the sourceforge site (https://sourceforge.net/projects/pymol/files/Legacy/). The other alternative is compiling; for macOS, this can be done with MacPorts, Homebrew, etc. As well, https://www.lfd.uci.edu/~gohlke/pythonlibs/ may prove useful, as it provides wheel binaries for Windows/Linux.
+
+RELION will need to be compiled if the binaries are not used. The pre-compiled version comes as a part of the CCPEM package suite (https://www.ccpem.ac.uk/download.php). As a note, for Windows, RELION can be compiled using Windows Subsystem Linux (WSL), but will not have access to GPU.
 
 ### Environment:
 First, install Anaconda. Navigate to your project directory via the command line interface and install the environment corresponding to your operating system via:
