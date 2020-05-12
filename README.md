@@ -30,7 +30,7 @@ First, install Anaconda. Navigate to your project directory via the command line
 
 `conda create --name synth --file env_mac_64.txt`
 
-Once the Anaconda environment is installed, it must be initiated each time before running (the majority of) these scripts via the command: `conda activate synth`
+Once the Anaconda environment is installed, it must be initiated each time before running (the majority of) these scripts via the command: `conda activate synth`. As an important note, this environment is highly particular - make sure not to install any other python packages while `synth` is active (sourced), as conflicts may emerge. 
 
 When you are done using the environment, always exit via: `conda deactivate`
 
