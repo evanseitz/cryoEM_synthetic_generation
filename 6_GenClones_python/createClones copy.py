@@ -20,7 +20,7 @@ import pandas as pd
 pyDir = os.path.dirname(os.path.abspath(__file__)) #python file directory
 parDir = os.path.dirname(pyDir) #parent directory
 origDir = os.path.join(parDir, '4_GenMRC_eman/MRCs')
-occPath = os.path.join(parDir, '5_GenOcc_python/Occ2D_4k.npy')
+occPath = os.path.join(parDir, '5_GenOcc_python/Occ2D_1k.npy')
 cloneDir = os.path.join(parDir, '6_GenClones_python/MRC_clones')
 
 occFile = np.load(occPath)
@@ -41,14 +41,10 @@ fnames.sort(key=lambda f: int(filter(str.isdigit, f)))
 
 idx = 0
 for i in fnames:
-    short = i[:-4]
-    new1 = short + ('_%02d.mrc' % 1)
-    shutil.copy('%s/%s' % (origDir,i), '%s/%s' % (cloneDir,new1))
+    shutil.copy('%s/%s' % (origDir,i), '%s/%s' % (cloneDir,i))
     for j in range(2,occMax+1):
-        print(i,j)
 	if occ[idx] >= j:
-	    #short = i[:-4]
-            #print(short)
-	    new = short + ('_%02d.mrc' % j)
+	    short = i[:-5]
+	    new = short + ('%d.mrc' % j)
 	    shutil.copy('%s/%s' % (origDir,i), '%s/%s' % (cloneDir,new))
     idx += 1

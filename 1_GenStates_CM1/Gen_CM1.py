@@ -21,7 +21,7 @@ for i in range(1,21): #-20 degrees total
         rc('combine #0-1, name CM1_%s' % i)
         rc('write relative #0 format pdb #2 %s/CM1_0%s.pdb' % (outDir,i))
     else:
-        rc('turn 0,1,0 %d center sel models #0' % rot)
+        rc('turn 0,1,0 %f center sel models #0' % rot)
         rc('combine #0-1, name CM1_%s' % i)
         if i < 10:
             rc('write relative #0 format pdb #2 %s/CM1_0%s.pdb' % (outDir,i))
