@@ -15,7 +15,7 @@ rc('open' + monoB)
 rc('open' + monoA)
 rc('select :677.a') #select central hinge atom (LEU 674)
 
-rot = 1
+rot = .5 #1 for original; .5 results in ~0.439 Angstrom RMSD between CM1 states; peripheral atoms: {0.9, 1.0, 1.0} Angstrom
 for i in range(1,21): #-20 degrees total
     if i == 1: #don't rotate for state 1
         rc('combine #0-1, name CM1_%s' % i)
