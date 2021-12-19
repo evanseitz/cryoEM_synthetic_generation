@@ -32,7 +32,7 @@ for CM in CM1_paths:
     
     for i in range(1,21):
         print(CM_name, i)
-        cmd.rotate('z', 2, 'sele')
+        cmd.rotate('z', 2, 'sele') #was originally 2; 1.44 results in ~0.439 Angstrom RMSD between CM2 states; peripheral atoms: {1.4, 1.5, 1.5} Angstrom
 
         # SAVE:
         if idx < 10 and i < 10:
