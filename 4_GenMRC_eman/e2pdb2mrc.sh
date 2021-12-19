@@ -5,5 +5,5 @@ do
     out=`basename ${i%.*}_1.mrc`
     outFile=/mnt/Data2/evanseitz/Hsp90_Online/4_GenMRC_eman/MRCs/$out
     echo "$outFile"
-    e2pdb2mrc.py "${i}" $outFile -A 1 -R 3 -B 250 #pixel size, resolution, box size
+    e2pdb2mrc.py "${i}" $outFile -A 1 -R 3 -B 320 #pixel size, resolution, box size (box size was originally 250)
 done
