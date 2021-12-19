@@ -82,7 +82,7 @@ def find_SNR(image):
             else:
                 SIG_1D[idx] = IMG_1D[idx]
             idx += 1
-        SIG_2D = np.asarray(SIG_1D).reshape(250, 250)
+        SIG_2D = np.asarray(SIG_1D).reshape(320, 320)
         plt.imshow(SIG_2D)
         plt.show()
         
