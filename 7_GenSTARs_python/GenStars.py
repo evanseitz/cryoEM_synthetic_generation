@@ -69,7 +69,7 @@ for i in mrcPaths:
             \n')
 
     for i in range(0,len(rot)):
-        df = np.random.randint(low=2000, high=10000, size=1)[0]
+        df = np.random.randint(low=5000, high=15000, size=1)[0] #was originally [2000, 10000]
         if 1:
             x = 0
             y = 0
