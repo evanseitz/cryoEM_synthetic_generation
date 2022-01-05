@@ -47,7 +47,8 @@ Please cite us if you find this code useful in your research:
 		URL = {https://www.biorxiv.org/content/10.1101/864116v1},
 		journal = {bioRxiv}}
 
-You can additionally choose to cite this repository directly:
+Additionally, you can cite this repository code directly:
+
 [![DOI](https://zenodo.org/badge/220536612.svg)](https://zenodo.org/badge/latestdoi/220536612)
 
 
