@@ -11,3 +11,4 @@
   - `outFile`: change the path before `/8_GenStacksCTF_relion/` to match your system
   - `angpix`: change to match your previously-defined pixel size (if altered)
 - Running `relion_projCTF.sh` will generate an updated alignment file (`.star`) and image stack (`.mrcs`) for each of the previously cloned electron density maps (`.mrc`); these files can be found in the `stacks` output folder.
+- As a note, the `relion_project` command has been tested using RELION version 3.0.8. For RELION 3.1, a different syntax is required: https://github.com/3dem/relion/issues/547
