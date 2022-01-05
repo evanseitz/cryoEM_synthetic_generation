@@ -36,7 +36,7 @@ Once the Anaconda environment is installed, it must be initiated each time befor
 
 ### Attribution:
 Please cite us if you find this code useful in your research:
-@article {Seitz_Synth_MS,
+"@article {Seitz_Synth_MS,
 	author = {Seitz, E. and Acosta-Reyes, F. and Schwander, P. and Frank, J.},
 	title = {Simulation of cryo-{E}{M} ensembles from atomic models of molecules exhibiting continuous conformations},
 	elocation-id = {864116},
@@ -45,7 +45,7 @@ Please cite us if you find this code useful in your research:
 	publisher = {Cold Spring Harbor Laboratory},
 	URL = {https://www.biorxiv.org/content/10.1101/864116v1},
 	journal = {bioRxiv}
-}
+}"
 
 [![DOI](https://zenodo.org/badge/220536612.svg)](https://zenodo.org/badge/latestdoi/220536612)
 
