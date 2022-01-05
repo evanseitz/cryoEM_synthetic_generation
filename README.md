@@ -53,8 +53,7 @@ Additionally, you can cite this repository code directly via the following DOI:
 
 
 ### License:
-Copyright 2018-2020 Evan Seitz
-
+Copyright 2018-2020 Evan Seitz\\
 Frank Lab, Columbia University
 
 For further details, please see the LICENSE file.
