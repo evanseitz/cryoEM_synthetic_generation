@@ -10,4 +10,4 @@
   - `def f1(x, y)`: specific function for generating the occupancy map, including discrete alterations to that map within the subsequent section (`if 1:`)
   - `range(0,20)`: each range in this double loop needs to be adjusted to match the number of states (*N*, *M*) chosen
 - Running `Occ2D_1k.py` (or `Occ2D_5k.py`, etc.) will generate a corresponding NumPy (`.npy`) data file; the name of this file will be needed in subsequent steps.
-
+- To note, `Occ2D_4k.py` was used in https://www.biorxiv.org/content/10.1101/2021.06.18.449029v2
