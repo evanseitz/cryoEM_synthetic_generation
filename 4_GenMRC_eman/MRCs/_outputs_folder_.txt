@@ -1,1 +1,1 @@
-Outputs folder for the Coulomb potential maps (MRC)
+Outputs folder for the 3D electron density maps (MRC format)
