@@ -37,7 +37,8 @@ fnames = []
 for filename in os.listdir(origDir):
     if filename.endswith('.mrc'):
         fnames.append(filename)
-fnames.sort(key=lambda f: int(filter(str.isdigit, f)))
+#fnames.sort(key=lambda f: int(filter(str.isdigit, f))) #Python2
+fnames.sort(key=lambda f: list(filter(str.isdigit, f))) #Python3; i.e., https://www.py4u.net/discuss/173770
 
 idx = 0
 for i in fnames:
@@ -46,9 +47,9 @@ for i in fnames:
     shutil.copy('%s/%s' % (origDir,i), '%s/%s' % (cloneDir,new1))
     for j in range(2,occMax+1):
         print(i,j)
-	if occ[idx] >= j:
-	    #short = i[:-4]
+        if occ[idx] >= j:
+            #short = i[:-4]
             #print(short)
-	    new = short + ('_%02d.mrc' % j)
-	    shutil.copy('%s/%s' % (origDir,i), '%s/%s' % (cloneDir,new))
+            new = short + ('_%02d.mrc' % j)
+            shutil.copy('%s/%s' % (origDir,i), '%s/%s' % (cloneDir,new))
     idx += 1
