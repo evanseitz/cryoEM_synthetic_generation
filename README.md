@@ -32,9 +32,7 @@ First, install Anaconda. Navigate to your project directory via the command line
 
 (If this installation method throws any errors for your machine, we recommend installing the ManifoldEM environment instead, with corresponding instructions in the user manual located at https://github.com/evanseitz/ManifoldEM_Python)
 
-Once the Anaconda environment is installed, it must be initiated each time before running (the majority of) these scripts via the command: `conda activate synth`. As an important note, this environment is highly particular - make sure not to install any other python packages while `synth` is active (sourced), as conflicts may emerge.
-
-When you are done using the environment, always exit via: `conda deactivate`
+Once the Anaconda environment is installed, it must be initiated each time before running (the majority of) these scripts via the command: `conda activate synth`. As an important note, this environment is highly particular - make sure not to install any other python packages while `synth` is active (sourced), as conflicts may emerge. When you are done using the environment, always exit via: `conda deactivate`
 
 ### Attribution:
 Please cite `E. Seitz, F. Acosta-Reyes, P. Schwander and J. Frank (2019); https://www.biorxiv.org/content/10.1101/864116v1` if you find this code useful in your research.
